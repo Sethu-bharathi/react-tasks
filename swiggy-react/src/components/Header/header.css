@@ -39,6 +39,9 @@
   }
   .nav-items > li {
     padding-inline: 30px !important;
+    display: flex;
+    align-items: center;
+    gap:5px;
   }
   
   li {
