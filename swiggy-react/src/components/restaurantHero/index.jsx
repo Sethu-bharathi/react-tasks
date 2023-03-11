@@ -1,6 +1,11 @@
+import { useState } from "react";
 import discountImage from "../../assets/images/icons8-discount-30 (3).png"
 
 const RestaurantHero = () => {
+  const [searchText, setSearchText] = useState("");
+  const searchHandler=(e)=>{
+    setSearchText(e.target.value)
+  }
   return (
     <section className="container">
       <img
@@ -9,7 +14,7 @@ const RestaurantHero = () => {
         height="165"
         src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/y2y8vkvvgpdu4nkxx5uj"
         alt="Swiggy"
-        srcset=""
+        srcSet=""
       />
       <div className="restaurant">
         <h2>Kitchens of Punjab</h2>
@@ -35,8 +40,9 @@ const RestaurantHero = () => {
             <i className="fi fi-search black"></i>
             <input
               id="search"
-              type="text"
-              value=""
+              type="search"
+              value={searchText}
+              onChange={searchHandler}
               placeholder="Search for dishes..."
             />
           </div>
@@ -75,7 +81,7 @@ const RestaurantHero = () => {
           <img
             src="src/assets/images/icons8-discount-30 (3).png"
             alt="Discount"
-            srcset=""
+            srcSet=""
           />
           <span>
             50% off up to ₹100 | Use code
@@ -87,7 +93,7 @@ const RestaurantHero = () => {
           <img
             src={discountImage}
             alt="Discount"
-            srcset=""
+            srcSet=""
           />
           <span>FLAT150 off | Use VDAY</span>
         </div>

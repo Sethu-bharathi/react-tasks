@@ -14,7 +14,8 @@ const Card = (props) => {
               const food = props.foodItem[item.id.toString()];
               return (
                 <MenuItem
-                isVeg={food.isVeg}
+                  key={item.id.toString() + element.name}
+                  isVeg={food.isVeg}
                   name={food.name}
                   price={food.price}
                   description={food.description}
@@ -27,7 +28,10 @@ const Card = (props) => {
           <>
             {element.widgets.map((widgetItem) => {
               return (
-                <div id={widgetItem.name.replace(/[^A-Z0-9]/gi, "")}>
+                <div
+                  id={widgetItem.name.replace(/[^A-Z0-9]/gi, "")}
+                  key={widgetItem.name.replace(/[^A-Z0-9]/gi, "")}
+                >
                   <h3 className="catagory">{widgetItem.name}</h3>
                   <h5 className="total">{widgetItem.entities.length} Items</h5>
                   <div className="u-underline"></div>
@@ -35,7 +39,8 @@ const Card = (props) => {
                     const food = props.foodItem[item.id.toString()];
                     return (
                       <MenuItem
-                      isVeg={food.isVeg}
+                        key={item.id.toString() + element.name}
+                        isVeg={food.isVeg}
                         name={food.name}
                         price={food.price}
                         description={food.description}
