@@ -35,7 +35,7 @@ button {
 html{
   font-family: Lato;
   scroll-behavior: smooth;
-  scroll-padding-top: 180px;
+  scroll-padding-top: 200px;
 }
 html,
 body {
@@ -111,9 +111,6 @@ li {
   margin-left: 5px;
 }
 
-.cart {
-  position: relative;
-}
 .zero {
   font-size: 20px;
   color: #aaa;

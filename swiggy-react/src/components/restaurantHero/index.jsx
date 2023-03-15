@@ -1,11 +1,19 @@
 import { useState } from "react";
-import discountImage from "../../assets/images/icons8-discount-30 (3).png"
-
-const RestaurantHero = () => {
+import discountImage from "../../assets/images/icons8-discount-30 (3).png";
+import { useDispatch } from "react-redux";
+import { menuActions } from "../../store/menu-context";
+import React from "react";
+const RestaurantHero = React.forwardRef(() => {
+  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
-  const searchHandler=(e)=>{
-    setSearchText(e.target.value)
-  }
+
+  const searchHandler = (e) => {
+    setSearchText(e.target.value);
+    dispatch(menuActions.search({ searchText: e.target.value }));
+  };
+  const toggleVegHandler = () => {
+    dispatch(menuActions.vegToggle());
+  };
   return (
     <section className="container">
       <img
@@ -21,9 +29,8 @@ const RestaurantHero = () => {
         <p className="faded">Punjabi, North Indian</p>
         <p className="faded">Bilekahalli, Bannerghatta Main Road</p>
         <div className="card">
-          <div className="vr" style={{paddingLeft: "5px"}}>
-            <i className="fi fi-star-full"></i>
-            <h3 className="inline">4.0</h3>
+          <div className="vr" style={{ paddingLeft: "5px" }}>
+            <i className="fi fi-star-full"></i> <h3 className="inline">4.0</h3>
             <p className="rating">500+ Ratings</p>
           </div>
           <div className="vr">
@@ -53,7 +60,7 @@ const RestaurantHero = () => {
                   <input
                     type="checkbox"
                     className="checkbox"
-                    onClick="toggleveg()"
+                    onClick={toggleVegHandler}
                     value=""
                   />
                   <span className="border-holder"></span>
@@ -70,7 +77,7 @@ const RestaurantHero = () => {
             Veg Only
           </div>
           <div>
-            <i className="fi fi-heart-line" style={{color: "#000"}}></i>
+            <i className="fi fi-heart-line" style={{ color: "#000" }}></i>
             Favorite
           </div>
         </div>
@@ -90,16 +97,11 @@ const RestaurantHero = () => {
           </span>
         </div>
         <div>
-          <img
-            src={discountImage}
-            alt="Discount"
-            srcSet=""
-          />
+          <img src={discountImage} alt="Discount" srcSet="" />
           <span>FLAT150 off | Use VDAY</span>
         </div>
       </div>
     </section>
   );
-};
-
+});
 export default RestaurantHero;

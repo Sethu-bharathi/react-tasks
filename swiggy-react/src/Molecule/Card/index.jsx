@@ -1,11 +1,27 @@
 import MenuItem from "../../Atoms/menuItem";
-
+import { useEffect, useRef } from "react";
 const Card = (props) => {
+  const targetRef = useRef();
+  useEffect(() => {
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting === true) {
+          props.setVisiblity(props.totalData.name);
+          console.log(props.totalData.name, props);
+        }
+      },
+      { threshold: [0.15], rootMargin: "-180px 0px 0px 0px" }
+    );
+    navObserver.observe(targetRef.current);
+  }, []);
+
   const element = props.totalData;
   return (
     <>
       <div id={element.name.replace(/[^A-Z0-9]/gi, "")}>
-        <h3 className="catagory">{element.name}</h3>
+        <h3 className="catagory" ref={targetRef}>
+          {element.name}
+        </h3>
         {element.entities ? (
           <>
             <h5 className="total">{element.entities.length} Items</h5>
@@ -14,6 +30,7 @@ const Card = (props) => {
               const food = props.foodItem[item.id.toString()];
               return (
                 <MenuItem
+                  id={item.id}
                   key={item.id.toString() + element.name}
                   isVeg={food.isVeg}
                   name={food.name}
@@ -38,14 +55,17 @@ const Card = (props) => {
                   {widgetItem.entities.map((item) => {
                     const food = props.foodItem[item.id.toString()];
                     return (
-                      <MenuItem
-                        key={item.id.toString() + element.name}
-                        isVeg={food.isVeg}
-                        name={food.name}
-                        price={food.price}
-                        description={food.description}
-                        image={food.cloudinaryImageId}
-                      />
+                      <>
+                        <MenuItem
+                          key={item.id.toString() + element.name}
+                          isVeg={food.isVeg}
+                          name={food.name}
+                          price={food.price}
+                          description={food.description}
+                          image={food.cloudinaryImageId}
+                        />
+                        <div className="line"></div>
+                      </>
                     );
                   })}
                 </div>
@@ -54,7 +74,6 @@ const Card = (props) => {
           </>
         )}
       </div>
-      <div className="line"></div>
     </>
   );
 };

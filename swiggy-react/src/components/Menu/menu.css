@@ -82,7 +82,7 @@
 }
 .sticky {
   position: sticky;
-  top: 180px;
+  top: 200px;
 }
 .orange-indicator {
   height: 100%;
@@ -186,10 +186,9 @@
 }
 .cart {
   margin-top: 21px;
-  position: relative;
   position: -webkit-sticky;
   position: sticky;
-  top: 180px;
+  top: 200px;
 }
 .catagory {
   margin: 0;
@@ -214,7 +213,4 @@
   width: 30px;
   background-color: #3d4152;
   margin-bottom: 30px;
-}
-.cart {
-  position: relative;
 }

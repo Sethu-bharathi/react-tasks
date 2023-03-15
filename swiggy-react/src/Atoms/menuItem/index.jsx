@@ -1,4 +1,16 @@
+import { cartActions } from "../../store/cart-context";
+import { useSelector, useDispatch } from "react-redux";
+
 const MenuItem = (props) => {
+  const cart = useSelector((state) => state.cart);
+  const existingCartItem = cart.items.find((item) => item.id === props.id);
+  const dispatch = useDispatch();
+  const addCartHandler = () => {
+    dispatch(cartActions.addItem({ ...props }));
+  };
+  const removeCartHandler = (item) => {
+    dispatch(cartActions.removeItem(item.id));
+  };
   return (
     <div className="menu-card">
       <div>
@@ -22,7 +34,37 @@ const MenuItem = (props) => {
         ) : (
           <div className="food-img"></div>
         )}
-        <div className="add">ADD</div>
+        {existingCartItem ? (
+          <div className="add">
+            <ul className="add-cart1">
+              <li>
+                <button
+                  onClick={removeCartHandler.bind(null, existingCartItem)}
+                >
+                  -
+                </button>
+              </li>
+              <li>
+                {" "}
+                <button className="fa-green">
+                  {existingCartItem.quantity}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={addCartHandler.bind(null, existingCartItem)}
+                  className="fa-green"
+                >
+                  +
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="add" onClick={addCartHandler}>
+            ADD
+          </div>
+        )}
       </button>
     </div>
   );
