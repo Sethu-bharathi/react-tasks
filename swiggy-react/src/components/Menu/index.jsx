@@ -4,7 +4,7 @@ import { menuData } from "./menuData";
 import { useInView } from "react-intersection-observer";
 import Cart from "../../Molecule/Cart";
 import { useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 const Menu = () => {
   const orangeRef = useRef();
@@ -18,12 +18,11 @@ const Menu = () => {
     const upgradedState = {};
     menu.forEach((element, index) => {
       if (element.name === name) {
-        orangeRef.current.style.transform = `translateY(${index*25}px)`;
+        orangeRef.current.style.transform = `translateY(${index * 25}px)`;
       }
       upgradedState[element.name] = element.name === name;
     });
     setisInview({ ...upgradedState });
-    console.log(upgradedState);
   };
 
   const { ref, inView, entry } = useInView({

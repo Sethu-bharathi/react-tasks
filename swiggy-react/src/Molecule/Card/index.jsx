@@ -1,5 +1,5 @@
 import MenuItem from "../../Atoms/menuItem";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 const Card = (props) => {
   const targetRef = useRef();
   useEffect(() => {
@@ -7,7 +7,6 @@ const Card = (props) => {
       (entries) => {
         if (entries[0].isIntersecting === true) {
           props.setVisiblity(props.totalData.name);
-          console.log(props.totalData.name, props);
         }
       },
       { threshold: [0.15], rootMargin: "-180px 0px 0px 0px" }
@@ -55,7 +54,7 @@ const Card = (props) => {
                   {widgetItem.entities.map((item) => {
                     const food = props.foodItem[item.id.toString()];
                     return (
-                      <>
+                      <React.Fragment key={item.id.toString() + element.name}>
                         <MenuItem
                           key={item.id.toString() + element.name}
                           isVeg={food.isVeg}
@@ -65,7 +64,7 @@ const Card = (props) => {
                           image={food.cloudinaryImageId}
                         />
                         <div className="line"></div>
-                      </>
+                      </React.Fragment>
                     );
                   })}
                 </div>

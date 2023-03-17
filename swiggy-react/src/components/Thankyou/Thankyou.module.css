@@ -1,0 +1,42 @@
+.thank-you {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.thankyou-text {
+  margin-inline: 0;
+  margin-top: 10px;
+  color: #fff;
+  padding: 15px;
+  background-color: #111;
+  text-align: center;
+}
+
+/* .order-image > img {
+  height: auto;
+  max-width: max(90vh, 500px);
+} */
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: min(300px, 90vw);
+}
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  max-height: 20rem;
+  border: 2px dashed #555;
+  overflow: scroll;
+}
+.prepare-order {
+  background-color: #f5f1f1;
+  font-size: 1.1rem;
+  padding: 15px 10px;
+}

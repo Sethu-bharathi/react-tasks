@@ -1,19 +1,22 @@
+import "./App.css";
 
-import './App.css'
-import Footer from "./components/footer"
-import Header from './components/Header'
-import RestaurantHero from './components/restaurantHero'
-import Menu from "./components/Menu"
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./Pages/Home";
+import ThankYou from "./Pages/ThankYou";
 function App() {
-
-  return (
-    <div>
-      <Header />
-      <RestaurantHero />
-      <Menu />
-      <Footer />
-    </div>
-  )
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      children: [
+        { index: true, element: <HomePage /> },
+        {
+          path: "thank-you",
+          element: <ThankYou />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
