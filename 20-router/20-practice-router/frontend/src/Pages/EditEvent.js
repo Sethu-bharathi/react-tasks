@@ -1,5 +1,9 @@
-const EditEvents=()=>{
-    return <h2>EditEvents</h2>
-}
+import { useRouteLoaderData } from "react-router-dom";
+import EventForm from "../components/EventForm";
 
-export default EditEvents
+const EditEvents = () => {
+  const data = useRouteLoaderData("event-data");
+  return <EventForm event={data.event} method="patch"/>;
+};
+
+export default EditEvents;

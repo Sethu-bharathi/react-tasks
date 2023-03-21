@@ -1,5 +1,8 @@
-const NewEvents=()=>{
-    return <h2>NewEvents</h2>
-}
+import { json,redirect } from "react-router-dom";
+import EventForm from "../components/EventForm";
 
-export default NewEvents
+const NewEvents = () => {
+  return <EventForm method="post" />;
+};
+
+export default NewEvents;

@@ -1,13 +1,41 @@
-import { useParams } from "react-router-dom";
+import { useRouteLoaderData, json, redirect } from "react-router-dom";
 
-const EventsDetail = () => {
-  const params = useParams();
-  return (
-    <>
-      <h2>EventsDetail</h2>
-      <h3>Event Id {params.eventId}</h3>
-    </>
+import EventItem from "../components/EventItem";
+
+function EventDetailPage() {
+  const data = useRouteLoaderData("event-data");
+
+  return <EventItem event={data.event} />;
+}
+
+export default EventDetailPage;
+
+export async function loader({ request, params }) {
+  const id = params.eventId;
+
+  const response = await fetch("http://localhost:8080/events/" + id);
+
+  if (!response.ok) {
+    throw json(
+      { message: "Could not fetch details for selected event." },
+      {
+        status: 500,
+      }
+    );
+  } else {
+    return response;
+  }
+}
+export async function action({ request, params }) {
+  const response = await fetch(
+    "http://localhost:8080/events/" + params.eventId,
+    {
+      method: request.method,
+    }
   );
-};
-
-export default EventsDetail;
+  if (!response.ok) {
+    throw json({ message: "Could not delete data" }, { status: 500 });
+  } else {
+    return redirect("/events");
+  }
+}

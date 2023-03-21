@@ -1,50 +1,70 @@
-// Challenge / Exercise
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-// 1. Add five new (dummy) page components (content can be simple <h1> elements)
-//    - HomePage
-//    - EventsPage
-//    - EventDetailPage
-//    - NewEventPage
-//    - EditEventPage
-// 2. Add routing & route definitions for these five pages
-//    - / => HomePage
-//    - /events => EventsPage
-//    - /events/<some-id> => EventDetailPage
-//    - /events/new => NewEventPage
-//    - /events/<some-id>/edit => EditEventPage
-// 3. Add a root layout that adds the <MainNavigation> component above all page components
-// 4. Add properly working links to the MainNavigation
-// 5. Ensure that the links in MainNavigation receive an "active" class when active
-// 6. Output a list of dummy events to the EventsPage
-//    Every list item should include a link to the respective EventDetailPage
-// 7. Output the ID of the selected event on the EventDetailPage
-// BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Wrapper from "./components/Wrapper";
-import EditEvents from "./Pages/EditEvent";
-import Events from "./Pages/Events";
-import EventsDetail from "./Pages/EventsDetail";
-import HomePage from "./Pages/HomePage";
-import NewEvents from "./Pages/NewEvents";
+import EditEvents from './pages/EditEvent';
+import ErrorPage from './pages/Error';
+import EventDetailPage, {
+  loader as eventDetailLoader,
+  action as deleteEventAction,
+} from './pages/EventsDetail';
+import EventsPage, { loader as eventsLoader } from './pages/Events';
+import EventsRootLayout from './pages/EventsRoot';
+import HomePage from './pages/HomePage';
+import NewEvents from './pages/NewEvents';
+import {newEventAction } from './components/EventForm';
+import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
+import Wrapper from './components/Wrapper';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Wrapper />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: 'events',
+        element: <EventsRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <EventsPage />,
+            loader: eventsLoader,
+          },
+          {
+            path: ':eventId',
+            id: 'event-detail',
+            loader: eventDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <EventDetailPage />,
+                action: deleteEventAction,
+              },
+              {
+                path: 'edit',
+                element: <EditEvents />,
+                action: newEventAction,
+              },
+            ],
+          },
+          {
+            path: 'new',
+            element: <NewEvents />,
+            action: newEventAction,
+          },
+        ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <Wrapper />,
-      children: [
-        { index:true, element: <HomePage /> },
-        {
-          path: "events",
-          element: <Events />,
-        },
-        { path: "events/:eventId", element: <EventsDetail /> },
-        { path: "events/new", element: <NewEvents /> },
-        { path: "events/:eventId/edit", element: <EditEvents /> },
-      ],
-    },
-  ]);
-  return <RouterProvider router={routes} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
