@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { defer, json, useLoaderData, Await } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
@@ -12,7 +12,8 @@ function EventsPage() {
       <Await resolve={events}>
         {(loadedEvents) => {
           console.log(loadedEvents);
-          return <EventsList events={loadedEvents} />}}
+          return <EventsList events={loadedEvents} />;
+        }}
       </Await>
     </Suspense>
   );
