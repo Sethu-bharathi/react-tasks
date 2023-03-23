@@ -1,0 +1,12 @@
+.box {
+  height: 300px;
+  width: 300px;
+  background-color: #111;
+}
+
+.active {
+    height: 300px;
+    width: 300px;
+    background-color: #444;
+  }
+  

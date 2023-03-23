@@ -27,10 +27,11 @@ const Card = (props) => {
             <div className="u-underline"></div>
             {element.entities.map((item) => {
               const food = props.foodItem[item.id.toString()];
+              console.log(food.id);
               return (
                 <MenuItem
-                  id={item.id}
-                  key={item.id.toString() + element.name}
+                  id={food.id}
+                  key={food.id.toString() + element.name}
                   isVeg={food.isVeg}
                   name={food.name}
                   price={food.price}
@@ -56,6 +57,7 @@ const Card = (props) => {
                     return (
                       <React.Fragment key={item.id.toString() + element.name}>
                         <MenuItem
+                          id={food.id}
                           key={item.id.toString() + element.name}
                           isVeg={food.isVeg}
                           name={food.name}

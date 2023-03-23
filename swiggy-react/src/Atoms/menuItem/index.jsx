@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 const MenuItem = (props) => {
   const cart = useSelector((state) => state.cart);
+  if (!props.id) {
+    console.log(props.id,props.name);
+  }
   const existingCartItem = cart.items.find((item) => item.id === props.id);
   const dispatch = useDispatch();
   const addCartHandler = () => {

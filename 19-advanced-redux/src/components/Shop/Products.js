@@ -1,6 +1,5 @@
 import ProductItem from "./ProductItem";
 import classes from "./Products.module.css";
-
 const DUMMY_MEALS = [
   {
     id: "m1",
